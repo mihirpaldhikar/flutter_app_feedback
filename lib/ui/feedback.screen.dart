@@ -26,18 +26,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_feedback/constants/string.constants.dart';
 import 'package:flutter_app_feedback/managers/dialog.manager.dart';
-import 'package:flutter_app_feedback/models/app.model.dart';
-import 'package:flutter_app_feedback/models/device.model.dart';
-import 'package:flutter_app_feedback/services/app.service.dart';
-import 'package:flutter_app_feedback/services/identifier.service.dart';
-import 'package:flutter_app_feedback/utils/validator.uitl.dart';
+import 'package:flutter_app_feedback/utils/validator.utils.dart';
 
 class FeedbackScreen extends StatefulWidget {
-  final String appName;
-
   const FeedbackScreen({
     Key? key,
-    required this.appName,
   }) : super(key: key);
 
   @override
@@ -45,30 +38,9 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  AppModel _appModel = AppModel(
-    appName: 'appName',
-    appVersion: 'appVersion',
-    appBuildNumber: 'appBuildNumber',
-    packageName: 'packageName',
-  );
-  Device _device = Device(null, null);
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _feedback = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-
-    final _appData = await AppService().getAppInfo();
-    final _deviceInfo = await IdentifierService().getAndroidDeviceInformation();
-
-    setState(() {
-      _appModel = _appData;
-      _device = _deviceInfo!;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +52,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  print('pl');
-                }
+                if (_formKey.currentState!.validate()) {}
               },
               icon: const Icon(Icons.send),
             ),

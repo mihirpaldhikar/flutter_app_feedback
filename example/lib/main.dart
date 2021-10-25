@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_feedback/ui/feedback.screen.dart';
@@ -18,6 +16,8 @@ class FeedbackApp extends StatefulWidget {
 class _FeedbackAppState extends State<FeedbackApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: FeedbackScreen(appName: 'Feedback App',));
+    return const MaterialApp(
+      home: FeedbackScreen(),
+    );
   }
 }
