@@ -21,28 +21,35 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'dart:core';
+import 'dart:io';
 
-class Feedback {
-  final String packageName;
-  final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
-  final String currentStateScreenShotUrl;
-  final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_app_feedback/models/device.model.dart';
 
-  Feedback({
-    required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
-    required this.currentStateScreenShotUrl,
-    required this.userFeedbackData,
-    required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
-  });
+class IdentifierService {
+  final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
+
+  Future<Device?> getAndroidDeviceInformation() async {
+    try {
+      if (Platform.isAndroid) {
+        final androidDeviceInfo = await _deviceInfoPlugin.androidInfo;
+        return Device(androidDeviceInfo, null);
+      }
+      return null;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Device?> getIosDeviceInformation() async {
+    try {
+      if (Platform.isIOS) {
+        final iosDeviceInfo = await _deviceInfoPlugin.iosInfo;
+        return Device(null, iosDeviceInfo);
+      }
+      return null;
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

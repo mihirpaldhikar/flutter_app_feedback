@@ -21,28 +21,6 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'dart:core';
-
-class Feedback {
-  final String packageName;
-  final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
-  final String currentStateScreenShotUrl;
-  final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
-
-  Feedback({
-    required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
-    required this.currentStateScreenShotUrl,
-    required this.userFeedbackData,
-    required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
-  });
+class StringConstants {
+  static const String navigationFeedback = 'Send Feedback';
 }

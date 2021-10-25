@@ -21,28 +21,21 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'dart:core';
+class Validator {
+  bool validateEmail(String em) {
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-class Feedback {
-  final String packageName;
-  final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
-  final String currentStateScreenShotUrl;
-  final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
+    RegExp regExp = RegExp(p);
 
-  Feedback({
-    required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
-    required this.currentStateScreenShotUrl,
-    required this.userFeedbackData,
-    required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
-  });
+    return regExp.hasMatch(em);
+  }
+
+  bool validatePassword(String value) {
+    Pattern pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regex = RegExp(pattern.toString());
+
+    return regex.hasMatch(value);
+  }
 }

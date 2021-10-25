@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "1.1.0"
   cloud_firestore:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
@@ -64,8 +64,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  device_info_plus:
+  cupertino_icons:
     dependency: "direct main"
+    description:
+      name: cupertino_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
+  device_info_plus:
+    dependency: transitive
     description:
       name: device_info_plus
       url: "https://pub.dartlang.org"
@@ -128,7 +135,7 @@ packages:
     source: hosted
     version: "6.1.2"
   firebase_core:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -149,7 +156,7 @@ packages:
     source: hosted
     version: "1.1.0"
   firebase_storage:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_storage
       url: "https://pub.dartlang.org"
@@ -174,6 +181,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_app_feedback:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -234,7 +248,7 @@ packages:
     source: hosted
     version: "1.7.0"
   package_info_plus:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: package_info_plus
       url: "https://pub.dartlang.org"

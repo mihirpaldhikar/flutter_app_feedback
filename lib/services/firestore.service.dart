@@ -21,28 +21,36 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'dart:core';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app_feedback/models/feedback.model.dart';
 
-class Feedback {
-  final String packageName;
-  final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
-  final String currentStateScreenShotUrl;
-  final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
+class FirestoreService {
+  final FirebaseFirestore _firestore;
+  final String? feedbackCollectionPath;
 
-  Feedback({
-    required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
-    required this.currentStateScreenShotUrl,
-    required this.userFeedbackData,
-    required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
-  });
+  FirestoreService(this._firestore,
+      {this.feedbackCollectionPath = 'feedbacks'});
+
+  Future<bool> uploadUserFeedbackToFirebase(
+      {required Feedback feedback}) async {
+    try {
+      final feedbacksCollection =
+          _firestore.collection(feedbackCollectionPath!);
+
+      final feedbackData = {
+        'appName': feedback.appName,
+        'packageName': feedback.packageName,
+        'buildVersion': feedback.buildVersion,
+        'userFeedbackData': feedback.userFeedbackData,
+        'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
+        'deviceModel': feedback.deviceModel,
+        'userAgent': feedback.userAgent,
+        'machine': feedback.machine,
+        'feedbackSubmittedOn': FieldValue.serverTimestamp(),
+      };
+      return false;
+    } catch (error) {
+      return false;
+    }
+  }
 }

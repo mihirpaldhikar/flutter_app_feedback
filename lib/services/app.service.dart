@@ -21,28 +21,18 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'dart:core';
+import 'package:flutter_app_feedback/models/app.model.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
-class Feedback {
-  final String packageName;
-  final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
-  final String currentStateScreenShotUrl;
-  final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
+class AppService {
+  Future<AppModel> getAppInfo() async {
+    final PackageInfo _packageInfo = await PackageInfo.fromPlatform();
 
-  Feedback({
-    required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
-    required this.currentStateScreenShotUrl,
-    required this.userFeedbackData,
-    required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
-  });
+    return AppModel(
+      appName: _packageInfo.appName,
+      appVersion: _packageInfo.version,
+      packageName: _packageInfo.packageName,
+      appBuildNumber: _packageInfo.buildNumber,
+    );
+  }
 }

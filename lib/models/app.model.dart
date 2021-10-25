@@ -21,28 +21,31 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import 'dart:core';
+class AppModel {
+  String appName = '';
+  String packageName = '';
+  String appVersion = '';
+  String appBuildNumber = '';
 
-class Feedback {
-  final String packageName;
-  final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
-  final String currentStateScreenShotUrl;
-  final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
-
-  Feedback({
+  AppModel({
     required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
-    required this.currentStateScreenShotUrl,
-    required this.userFeedbackData,
+    required this.appVersion,
+    required this.appBuildNumber,
     required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
   });
+
+  AppModel.fromJson(Map<String, dynamic> json) {
+    appName = json['app_name'];
+    appVersion = json['app_version'];
+    appBuildNumber = json['app_build_number'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['app_name'] = appName;
+    data['app_version'] = appVersion;
+    data['app_build_number'] = appBuildNumber;
+
+    return data;
+  }
 }
