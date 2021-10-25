@@ -21,10 +21,28 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-library flutter_app_feedback;
+import 'dart:core';
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+class Feedback {
+  final String packageName;
+  final String appName;
+  final double buildVersion;
+  final DateTime feedbackSubmittedOn;
+  final String currentStateScreenShotUrl;
+  final String userFeedback;
+  final String deviceModel;
+  final String machine;
+  final String userAgent;
+
+  Feedback({
+    required this.appName,
+    required this.buildVersion,
+    required this.feedbackSubmittedOn,
+    required this.currentStateScreenShotUrl,
+    required this.userFeedback,
+    required this.packageName,
+    required this.deviceModel,
+    required this.machine,
+    required this.userAgent,
+  });
 }

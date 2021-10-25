@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^2.5.4
+  device_info_plus: ^3.1.0
   firebase_core: ^1.8.0
   firebase_storage: ^10.0.6
   flutter:
@@ -20,4 +21,4 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
-
+  uses-material-design: true
