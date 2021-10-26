@@ -51,7 +51,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
             color: Colors.transparent,
           ),
           imageProvider:
-              FileImage(File.fromUri(Uri.parse('${widget.imagePath}'))),
+              FileImage(File.fromUri(Uri.parse(widget.imagePath))),
         ),
       ),
     );

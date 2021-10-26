@@ -33,7 +33,7 @@ class FeedbackService {
 
   FeedbackService(
     this._firestore, {
-    this.feedbackCollectionPath = 'feedbacks' ?? 'feedbacks',
+    this.feedbackCollectionPath = 'feedbacks',
   });
 
   Future<bool> uploadUserFeedbackToFirebase({
