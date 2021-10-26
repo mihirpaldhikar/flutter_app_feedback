@@ -23,9 +23,14 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_feedback/constants/string.constants.dart';
 import 'package:flutter_app_feedback/managers/dialog.manager.dart';
+import 'package:flutter_app_feedback/models/feedback.model.dart';
+import 'package:flutter_app_feedback/services/app.service.dart';
+import 'package:flutter_app_feedback/services/firestore.service.dart';
+import 'package:flutter_app_feedback/services/identifier.service.dart';
 import 'package:flutter_app_feedback/utils/validator.utils.dart';
 
 class FeedbackScreen extends StatefulWidget {
@@ -51,8 +56,26 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           title: const Text(StringConstants.navigationFeedback),
           actions: [
             IconButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {}
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  final appInfo = await AppService().getAppInfo();
+                  if (Platform.isAndroid) {
+                    await FirestoreService(FirebaseFirestore.instance)
+                        .uploadUserFeedbackToFirebase(
+                      feedback: FeedbackModel(
+                        appName: appInfo.appName,
+                        buildVersionNumber: appInfo.appBuildNumber,
+                        appVersion: appInfo.appVersion,
+                        currentStateScreenShotUrl: 'currentStateScreenShotUrl',
+                        userFeedbackData: _feedback.text,
+                        packageName: appInfo.packageName,
+                      ),
+                      androidDeviceInfo: await IdentifierService()
+                          .getAndroidDeviceInformation(),
+                      iosDeviceInfo: null,
+                    );
+                  }
+                }
               },
               icon: const Icon(Icons.send),
             ),

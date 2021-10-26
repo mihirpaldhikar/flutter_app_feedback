@@ -23,26 +23,20 @@
 
 import 'dart:core';
 
-class Feedback {
+class FeedbackModel {
   final String packageName;
   final String appName;
-  final double buildVersion;
-  final DateTime feedbackSubmittedOn;
+  final String buildVersionNumber;
+  final String appVersion;
   final String currentStateScreenShotUrl;
   final String userFeedbackData;
-  final String deviceModel;
-  final String machine;
-  final String userAgent;
 
-  Feedback({
+  FeedbackModel({
     required this.appName,
-    required this.buildVersion,
-    required this.feedbackSubmittedOn,
+    required this.buildVersionNumber,
     required this.currentStateScreenShotUrl,
     required this.userFeedbackData,
+    required this.appVersion,
     required this.packageName,
-    required this.deviceModel,
-    required this.machine,
-    required this.userAgent,
   });
 }

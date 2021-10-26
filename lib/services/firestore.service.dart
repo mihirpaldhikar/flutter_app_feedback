@@ -21,33 +21,94 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_app_feedback/models/feedback.model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore;
   final String? feedbackCollectionPath;
 
-  FirestoreService(this._firestore,
-      {this.feedbackCollectionPath = 'feedbacks'});
+  FirestoreService(
+    this._firestore, {
+    this.feedbackCollectionPath = 'feedbacks' ?? 'feedbacks',
+  });
 
-  Future<bool> uploadUserFeedbackToFirebase(
-      {required Feedback feedback}) async {
+  Future<bool> uploadUserFeedbackToFirebase({
+    required FeedbackModel feedback,
+    required AndroidDeviceInfo? androidDeviceInfo,
+    required IosDeviceInfo? iosDeviceInfo,
+  }) async {
     try {
-      final feedbacksCollection =
-          _firestore.collection(feedbackCollectionPath!);
+      if (Platform.isAndroid) {
+        final feedbackData = {
+          'appName': feedback.appName,
+          'packageName': feedback.packageName,
+          'appVersion': feedback.appVersion,
+          'buildVersion': feedback.buildVersionNumber,
+          'userFeedbackData': feedback.userFeedbackData,
+          'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
+          'feedbackSubmittedOn': FieldValue.serverTimestamp(),
+          'systemInformation': {
+            'device': androidDeviceInfo!.device,
+            'isPhysicalDevice': androidDeviceInfo.isPhysicalDevice,
+            'buildFingerprint': androidDeviceInfo.fingerprint,
+            'model': androidDeviceInfo.model,
+            'product': androidDeviceInfo.product,
+            'sdkVersion': androidDeviceInfo.version.sdkInt,
+            'release': androidDeviceInfo.version.release,
+            'incrementalVersion': androidDeviceInfo.version.incremental,
+            'codename': androidDeviceInfo.version.codename,
+            'board': androidDeviceInfo.board,
+            'brand': androidDeviceInfo.brand,
+          }
+        };
 
-      final feedbackData = {
-        'appName': feedback.appName,
-        'packageName': feedback.packageName,
-        'buildVersion': feedback.buildVersion,
-        'userFeedbackData': feedback.userFeedbackData,
-        'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
-        'deviceModel': feedback.deviceModel,
-        'userAgent': feedback.userAgent,
-        'machine': feedback.machine,
-        'feedbackSubmittedOn': FieldValue.serverTimestamp(),
-      };
+        await _firestore
+            .collection(feedbackCollectionPath!)
+            .doc('android')
+            .collection('feedbacks')
+            .doc()
+            .set(feedbackData);
+
+        return true;
+      }
+      if (Platform.isIOS) {
+        final feedbackData = {
+          'appName': feedback.appName,
+          'packageName': feedback.packageName,
+          'appVersion': feedback.appVersion,
+          'buildVersion': feedback.buildVersionNumber,
+          'userFeedbackData': feedback.userFeedbackData,
+          'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
+          'feedbackSubmittedOn': FieldValue.serverTimestamp(),
+          'systemInformation': {
+            'name': iosDeviceInfo!.name,
+            'systemVersion': iosDeviceInfo.systemVersion,
+            'model': iosDeviceInfo.model,
+            'utsName': {
+              'version': iosDeviceInfo.utsname.version,
+              'release': iosDeviceInfo.utsname.release,
+              'machine': iosDeviceInfo.utsname.machine,
+              'nodeName': iosDeviceInfo.utsname.nodename,
+              'sysName': iosDeviceInfo.utsname.sysname,
+            },
+            'identifierForVendor': iosDeviceInfo.identifierForVendor,
+            'isPhysicalDevice': iosDeviceInfo.isPhysicalDevice,
+          }
+        };
+
+        await _firestore
+            .collection(feedbackCollectionPath!)
+            .doc('ios')
+            .collection('feedbacks')
+            .doc()
+            .set(feedbackData);
+
+        return true;
+      }
       return false;
     } catch (error) {
       return false;

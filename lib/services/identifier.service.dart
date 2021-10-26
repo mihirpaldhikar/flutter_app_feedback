@@ -24,16 +24,15 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter_app_feedback/models/device.model.dart';
 
 class IdentifierService {
   final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
 
-  Future<Device?> getAndroidDeviceInformation() async {
+  Future<AndroidDeviceInfo?> getAndroidDeviceInformation() async {
     try {
       if (Platform.isAndroid) {
         final androidDeviceInfo = await _deviceInfoPlugin.androidInfo;
-        return Device(androidDeviceInfo, null);
+        return androidDeviceInfo;
       }
       return null;
     } catch (error) {
@@ -41,11 +40,11 @@ class IdentifierService {
     }
   }
 
-  Future<Device?> getIosDeviceInformation() async {
+  Future<IosDeviceInfo?> getIosDeviceInformation() async {
     try {
       if (Platform.isIOS) {
         final iosDeviceInfo = await _deviceInfoPlugin.iosInfo;
-        return Device(null, iosDeviceInfo);
+        return iosDeviceInfo;
       }
       return null;
     } catch (error) {

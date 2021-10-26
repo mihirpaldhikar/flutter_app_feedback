@@ -80,44 +80,43 @@ class DialogManager {
                 const Text('System'),
                 ListTile(
                   title: const Text('Device'),
-                  subtitle: Text('${_deviceInfo!.androidDeviceInfo!.device}'),
+                  subtitle: Text('${_deviceInfo!.device}'),
                 ),
                 ListTile(
                   title: const Text('Build Fingerprint'),
-                  subtitle:
-                      Text('${_deviceInfo.androidDeviceInfo!.fingerprint}'),
+                  subtitle: Text('${_deviceInfo.fingerprint}'),
                 ),
                 ListTile(
                   title: const Text('Model'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.model}'),
+                  subtitle: Text('${_deviceInfo.model}'),
                 ),
                 ListTile(
                   title: const Text('Product'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.product}'),
+                  subtitle: Text('${_deviceInfo.product}'),
                 ),
                 ListTile(
                   title: const Text('SDK Version'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.version.sdkInt}'),
+                  subtitle: Text('${_deviceInfo.version.sdkInt}'),
                 ),
                 ListTile(
-                  title: Text('Release'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.version.release}'),
+                  title: const Text('Release'),
+                  subtitle: Text('${_deviceInfo.version.release}'),
                 ),
                 ListTile(
                   title: const Text('Incremental Version'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.version.incremental}'),
+                  subtitle: Text('${_deviceInfo.version.incremental}'),
                 ),
                 ListTile(
                   title: const Text('Codename'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.version.codename}'),
+                  subtitle: Text('${_deviceInfo.version.codename}'),
                 ),
                 ListTile(
                   title: const Text('Board'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.board}'),
+                  subtitle: Text('${_deviceInfo.board}'),
                 ),
                 ListTile(
                   title: const Text('Brand'),
-                  subtitle: Text('${_deviceInfo.androidDeviceInfo!.brand}'),
+                  subtitle: Text('${_deviceInfo.brand}'),
                 ),
               ],
             ),
