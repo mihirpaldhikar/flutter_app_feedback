@@ -1,6 +1,6 @@
 name: flutter_app_feedback
 description: Flutter Package to implement Feedback System in Flutter Project.
-version: 0.0.1
+version: 0.0.1+1
 homepage: https://github.com/imihirpaldhikar/flutter_app_feedback
 
 environment:

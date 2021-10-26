@@ -40,11 +40,13 @@ class FeedbackScreen extends StatefulWidget {
   final String screenShotPath;
   final String feedbackFooterText;
   final String? fromEmail;
+  final String reportType;
 
   const FeedbackScreen({
     Key? key,
     required this.screenShotPath,
     required this.feedbackFooterText,
+    required this.reportType,
     this.fromEmail = '',
   }) : super(key: key);
 
@@ -104,6 +106,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         appName: appInfo.appName,
                         buildVersionNumber: appInfo.appBuildNumber,
                         appVersion: appInfo.appVersion,
+                        reportType: widget.reportType,
                         currentStateScreenShotUrl: downloadableUrl,
                         userFeedbackData: _feedback.text,
                         packageName: appInfo.packageName,
@@ -289,7 +292,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       radius: 15,
                       onTap: () {
                         if (Platform.isAndroid) {
-                          DialogManager(context).showAndroidSystemDialog();
+                          DialogManager(context).showAndroidSystemDialog(reportType: widget.reportType);
                         }
                       },
                       child: Container(

@@ -34,7 +34,7 @@ class DialogManager {
   final AppService _appService = AppService();
   final IdentifierService _identifierService = IdentifierService();
 
-  void showAndroidSystemDialog() async {
+  void showAndroidSystemDialog({required String reportType}) async {
     final _appInfo = await _appService.getAppInfo();
     final _deviceInfo = await _identifierService.getAndroidDeviceInformation();
     showDialog(
@@ -49,9 +49,9 @@ class DialogManager {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ListTile(
-                  title: Text('Report Type'),
-                  subtitle: Text('User initiated report'),
+                ListTile(
+                  title: const Text('Report Type'),
+                  subtitle: Text(reportType),
                 ),
                 ListTile(
                   title: const Text('Package name'),

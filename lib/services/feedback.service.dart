@@ -51,6 +51,7 @@ class FeedbackService {
           'userFeedbackData': feedback.userFeedbackData,
           'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
           'feedbackSubmittedOn': FieldValue.serverTimestamp(),
+          'reportType': feedback.reportType,
           'systemInformation': {
             'device': androidDeviceInfo!.device,
             'isPhysicalDevice': androidDeviceInfo.isPhysicalDevice,

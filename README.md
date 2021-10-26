@@ -1,4 +1,4 @@
-![Flutter Feedback Banner](./assets/flutter_app_feedback_banner.png)
+![Flutter Feedback Banner](https://raw.githubusercontent.com/imihirpaldhikar/flutter_app_feedback/main/assets/flutter_app_feedback_banner.png)
 
 # Flutter App Feedback
 

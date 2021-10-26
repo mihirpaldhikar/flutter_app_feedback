@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => FeedbackScreen(
+                      reportType: 'User initiated report', // Type of the report whether report is initiated by the system or the user.
                       //fromEmail: 'user@example.com', // Remove this comment if you need to set a default email in From field.
                       screenShotPath: imagePath,
                       // Use the image that we have received from about function.
