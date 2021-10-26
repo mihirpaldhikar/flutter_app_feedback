@@ -1,4 +1,4 @@
-![Flutter Feedback Banner](./assets/flutter_app_feedback_banner.svg)
+![Flutter Feedback Banner](./assets/flutter_app_feedback_banner.png)
 
 # Flutter App Feedback
 
