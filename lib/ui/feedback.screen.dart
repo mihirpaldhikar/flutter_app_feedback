@@ -29,7 +29,7 @@ import 'package:flutter_app_feedback/constants/string.constants.dart';
 import 'package:flutter_app_feedback/managers/dialog.manager.dart';
 import 'package:flutter_app_feedback/models/feedback.model.dart';
 import 'package:flutter_app_feedback/services/app.service.dart';
-import 'package:flutter_app_feedback/services/firestore.service.dart';
+import 'package:flutter_app_feedback/services/feedback.service.dart';
 import 'package:flutter_app_feedback/services/identifier.service.dart';
 import 'package:flutter_app_feedback/utils/validator.utils.dart';
 
@@ -60,7 +60,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 if (_formKey.currentState!.validate()) {
                   final appInfo = await AppService().getAppInfo();
                   if (Platform.isAndroid) {
-                    await FirestoreService(FirebaseFirestore.instance)
+                    await FeedbackService(FirebaseFirestore.instance)
                         .uploadUserFeedbackToFirebase(
                       feedback: FeedbackModel(
                         appName: appInfo.appName,

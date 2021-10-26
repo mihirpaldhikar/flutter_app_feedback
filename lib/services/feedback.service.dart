@@ -27,11 +27,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_app_feedback/models/feedback.model.dart';
 
-class FirestoreService {
+class FeedbackService {
   final FirebaseFirestore _firestore;
   final String? feedbackCollectionPath;
 
-  FirestoreService(
+  FeedbackService(
     this._firestore, {
     this.feedbackCollectionPath = 'feedbacks' ?? 'feedbacks',
   });
