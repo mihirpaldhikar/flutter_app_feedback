@@ -1,4 +1,4 @@
-![Flutter Feedback Banner](./assets/flutter_app_feedback_banner.svg)
+![Flutter Feedback Banner](https://raw.githubusercontent.com/imihirpaldhikar/flutter_app_feedback/691b314bf01d7767003ae7ff40448970c78ca49f/assets/flutter_app_feedback_banner.svg)
 
 # Flutter App Feedback
 
@@ -15,12 +15,13 @@ This package also takes the screenshot of the current state of the app before ta
 In order to use this package, you need to integrate the Firebase with your Flutter Project. The docs regarding this can be found over [Flutter Firebase](https://firebase.flutter.dev).
 
 <center>
-<img src="./assets/feedback_screen.png" width="200">
+<img src="https://github.com/imihirpaldhikar/flutter_app_feedback/blob/main/assets/feedback_screen.png?raw=true" width="200">
 </center>
 
 ## Example
 
 ```dart
+
 ElevatedButton( // You can use any Widget.
     onPressed: () async {
        // Capture the Screen Shot and save to a variable of your choice.
@@ -41,6 +42,7 @@ ElevatedButton( // You can use any Widget.
               },
               child: const Text('Send Feedback'),
             ),
+            
 ```
 
 Full Example can be found in [main.dart](./example/lib/main.dart)
