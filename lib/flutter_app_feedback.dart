@@ -24,3 +24,4 @@
 library flutter_app_feedback;
 
 export './ui/feedback.screen.dart';
+export './services/feedback.service.dart';
