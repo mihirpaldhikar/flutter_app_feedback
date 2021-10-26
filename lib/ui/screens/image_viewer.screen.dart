@@ -21,8 +21,39 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-library flutter_app_feedback;
+import 'dart:io';
 
-export './helpers/screenshot.helper.dart';
-export './services/feedback.service.dart';
-export 'ui/screens/feedback.screen.dart';
+import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
+
+class ImageViewerScreen extends StatefulWidget {
+  final String imagePath;
+
+  const ImageViewerScreen({
+    Key? key,
+    required this.imagePath,
+  }) : super(key: key);
+
+  @override
+  _ImageViewerScreenState createState() => _ImageViewerScreenState();
+}
+
+class _ImageViewerScreenState extends State<ImageViewerScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Screenshot'),
+      ),
+      body: SafeArea(
+        child: PhotoView(
+          backgroundDecoration: const BoxDecoration(
+            color: Colors.transparent,
+          ),
+          imageProvider:
+              FileImage(File.fromUri(Uri.parse('${widget.imagePath}'))),
+        ),
+      ),
+    );
+  }
+}

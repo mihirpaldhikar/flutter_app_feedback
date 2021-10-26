@@ -21,8 +21,29 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-library flutter_app_feedback;
+import 'dart:io';
 
-export './helpers/screenshot.helper.dart';
-export './services/feedback.service.dart';
-export 'ui/screens/feedback.screen.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+class StorageService {
+  Future<String> uploadUserScreenshotToFirebase({
+    required String filePath,
+    required String imagePath,
+    required String imageName,
+  }) async {
+    File file = File(filePath);
+
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('$imagePath/$imageName.png')
+          .putFile(file);
+      String downloadURL = await firebase_storage.FirebaseStorage.instance
+          .ref('$imagePath/$imageName.png')
+          .getDownloadURL();
+      return downloadURL;
+    } on firebase_core.FirebaseException {
+      rethrow;
+    }
+  }
+}

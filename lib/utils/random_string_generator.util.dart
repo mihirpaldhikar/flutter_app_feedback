@@ -21,8 +21,19 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-library flutter_app_feedback;
+import 'dart:math';
 
-export './helpers/screenshot.helper.dart';
-export './services/feedback.service.dart';
-export 'ui/screens/feedback.screen.dart';
+class RandomString {
+  final String _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  final Random _random = Random();
+
+  String generate(int length) => String.fromCharCodes(
+    Iterable.generate(
+      length,
+          (_) => _chars.codeUnitAt(
+        _random.nextInt(_chars.length),
+      ),
+    ),
+  );
+}

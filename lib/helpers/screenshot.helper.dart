@@ -21,8 +21,25 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-library flutter_app_feedback;
+import 'dart:io';
 
-export './helpers/screenshot.helper.dart';
-export './services/feedback.service.dart';
-export 'ui/screens/feedback.screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+
+class FeedbackScreenshot {
+  final ScreenshotController _screenshotController = ScreenshotController();
+
+  Future<String> captureScreen({required Widget screen}) async {
+    try {
+      final screenShot = await _screenshotController.captureFromWidget(screen);
+      final directory = await getApplicationDocumentsDirectory();
+      final image = File(
+          '${directory.path}/${DateTime.now().microsecond}${DateTime.now().hashCode}.png');
+      image.writeAsBytes(screenShot);
+      return image.path;
+    } catch (error) {
+      rethrow;
+    }
+  }
+}

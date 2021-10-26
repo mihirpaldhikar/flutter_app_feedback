@@ -21,8 +21,19 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-library flutter_app_feedback;
+import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 
-export './helpers/screenshot.helper.dart';
-export './services/feedback.service.dart';
-export 'ui/screens/feedback.screen.dart';
+class ImageHandler {
+  final BuildContext context;
+
+  ImageHandler(this.context);
+
+  Future<String> picImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final PickedFile? photo = (await _picker.getImage(
+      source: ImageSource.gallery,
+    ));
+    return photo!.path;
+  }
+}
