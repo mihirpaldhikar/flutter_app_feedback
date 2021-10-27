@@ -53,6 +53,15 @@ class FeedbackScreen extends StatefulWidget {
   /// It is either 'System initiated report' or 'User initiated report'.
   final String reportType;
 
+  /// [onFeedbackSubmissionStarted] is used to do some activity when the Send Feedback button is
+  /// clicked. You can show some message, dialogs or any other thing.
+  final VoidCallback onFeedbackSubmissionStarted;
+
+  /// [onFeedbackSubmitted] is used to do something after the feedback is submitted
+  /// or any error occurs while submitting the feedback. It returns a [bool] value.
+  /// [true] if submission is successful and [false] is submission is unsuccessful.
+  final Function(bool result) onFeedbackSubmitted;
+
   /// [FeedbackScreen] as [StatefulWidget] for creating thr feedback screen UI.
   const FeedbackScreen({
     Key? key,
@@ -60,6 +69,8 @@ class FeedbackScreen extends StatefulWidget {
     required this.feedbackFooterText,
     required this.reportType,
     this.fromEmail = '',
+    required this.onFeedbackSubmissionStarted,
+    required this.onFeedbackSubmitted,
   }) : super(key: key);
 
   @override
@@ -103,6 +114,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   final appInfo = await AppService().getAppInfo();
+                  widget.onFeedbackSubmissionStarted();
                   if (Platform.isAndroid) {
                     final downloadableUrl =
                         await StorageService().uploadUserScreenshotToFirebase(
@@ -112,8 +124,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       imageName:
                           '${DateTime.now().day}${DateTime.now().month}${DateTime.now().year}${DateTime.now().microsecondsSinceEpoch}${DateTime.now().hashCode}',
                     );
-                    await FeedbackService(FirebaseFirestore.instance)
-                        .uploadUserFeedbackToFirebase(
+                    final result =
+                        await FeedbackService(FirebaseFirestore.instance)
+                            .uploadUserFeedbackToFirebase(
                       feedback: FeedbackModel(
                         appName: appInfo.appName,
                         buildVersionNumber: appInfo.appBuildNumber,
@@ -127,6 +140,37 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           .getAndroidDeviceInformation(),
                       iosDeviceInfo: null,
                     );
+
+                    widget.onFeedbackSubmitted(result);
+                  }
+
+                  if (Platform.isIOS) {
+                    final downloadableUrl =
+                        await StorageService().uploadUserScreenshotToFirebase(
+                      filePath: widget.screenShotPath,
+                      imagePath:
+                          'feedbackScreenshots/${RandomString().generate(10)}',
+                      imageName:
+                          '${DateTime.now().day}${DateTime.now().month}${DateTime.now().year}${DateTime.now().microsecondsSinceEpoch}${DateTime.now().hashCode}',
+                    );
+                    final result =
+                        await FeedbackService(FirebaseFirestore.instance)
+                            .uploadUserFeedbackToFirebase(
+                      feedback: FeedbackModel(
+                        appName: appInfo.appName,
+                        buildVersionNumber: appInfo.appBuildNumber,
+                        appVersion: appInfo.appVersion,
+                        reportType: widget.reportType,
+                        currentStateScreenShotUrl: downloadableUrl,
+                        userFeedbackData: _feedback.text,
+                        packageName: appInfo.packageName,
+                      ),
+                      androidDeviceInfo: null,
+                      iosDeviceInfo:
+                          await IdentifierService().getIosDeviceInformation(),
+                    );
+
+                    widget.onFeedbackSubmitted(result);
                   }
                 }
               },

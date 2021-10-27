@@ -70,6 +70,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       // which describes how you will use the information.
                       feedbackFooterText:
                           'Some System Logs will be sent to Developer.',
+
+                      // Handel when the feedback submission is started
+                      onFeedbackSubmissionStarted: () {
+                        print('Feedback Submission Started');
+                      },
+
+                      // Handel when feedback submission is completed.
+                      onFeedbackSubmitted: (bool result) {
+                        if (result) {
+                          print('Feedback Submitted Successfully');
+                        } else {
+                          print('Error in submitting the Feedback');
+                        }
+                      },
                     ),
                   ),
                 );

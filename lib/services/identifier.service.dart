@@ -26,8 +26,15 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 
 class IdentifierService {
+  /// [IdentifierService] is used to get the device information.
+  IdentifierService();
+
+  // Initialized the DeviceInfoPlugin
   final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
 
+  /// [getAndroidDeviceInformation] is used to retrieve the like
+  /// [model], [manufacturer], [androidVersion], [securityPatch] and more
+  /// from the Android Device.
   Future<AndroidDeviceInfo?> getAndroidDeviceInformation() async {
     try {
       if (Platform.isAndroid) {
@@ -40,6 +47,8 @@ class IdentifierService {
     }
   }
 
+  /// [getIosDeviceInformation] is used to retrieve information like
+  /// [model], [version], and much more from iOS device.
   Future<IosDeviceInfo?> getIosDeviceInformation() async {
     try {
       if (Platform.isIOS) {
