@@ -27,7 +27,6 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class StorageService {
-
   /// [StorageService] is service used to connect to  the Firebase Storage.
   StorageService();
 
