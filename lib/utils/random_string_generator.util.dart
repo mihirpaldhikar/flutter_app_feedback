@@ -29,11 +29,11 @@ class RandomString {
   final Random _random = Random();
 
   String generate(int length) => String.fromCharCodes(
-    Iterable.generate(
-      length,
+        Iterable.generate(
+          length,
           (_) => _chars.codeUnitAt(
-        _random.nextInt(_chars.length),
-      ),
-    ),
-  );
+            _random.nextInt(_chars.length),
+          ),
+        ),
+      );
 }

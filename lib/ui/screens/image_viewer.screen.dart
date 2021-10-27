@@ -50,8 +50,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
           backgroundDecoration: const BoxDecoration(
             color: Colors.transparent,
           ),
-          imageProvider:
-              FileImage(File.fromUri(Uri.parse(widget.imagePath))),
+          imageProvider: FileImage(File.fromUri(Uri.parse(widget.imagePath))),
         ),
       ),
     );

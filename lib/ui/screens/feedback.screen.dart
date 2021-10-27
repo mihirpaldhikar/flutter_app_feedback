@@ -292,7 +292,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       radius: 15,
                       onTap: () {
                         if (Platform.isAndroid) {
-                          DialogManager(context).showAndroidSystemDialog(reportType: widget.reportType);
+                          DialogManager(context).showAndroidSystemDialog(
+                              reportType: widget.reportType);
                         }
                       },
                       child: Container(
