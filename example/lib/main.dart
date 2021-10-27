@@ -73,15 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       // Handel when the feedback submission is started
                       onFeedbackSubmissionStarted: () {
-                        print('Feedback Submission Started');
+                        //print('Feedback Submission Started');
                       },
 
                       // Handel when feedback submission is completed.
                       onFeedbackSubmitted: (bool result) {
                         if (result) {
-                          print('Feedback Submitted Successfully');
+                          //print('Feedback Submitted Successfully');
                         } else {
-                          print('Error in submitting the Feedback');
+                          //print('Error in submitting the Feedback');
                         }
                       },
                     ),
