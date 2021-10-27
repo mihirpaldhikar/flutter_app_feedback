@@ -23,11 +23,13 @@
 
 import 'dart:math';
 
+/// Create a random String
 class RandomString {
   final String _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   final Random _random = Random();
 
+  /// Create a random string of a given length which is unique every time.
   String generate(int length) => String.fromCharCodes(
         Iterable.generate(
           length,

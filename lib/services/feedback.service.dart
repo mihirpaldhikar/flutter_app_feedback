@@ -28,14 +28,26 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_app_feedback/models/feedback.model.dart';
 
 class FeedbackService {
+  /// [_firestore] initializes the [FirebaseFirestore] instance.
   final FirebaseFirestore _firestore;
+
+  /// [feedbackCollectionPath] is a optional parameter to set the default parent
+  /// directory of storing the User Feedbacks in Firebase Cloud Firestore.
+  /// Default is set to [feedbacks]
   final String? feedbackCollectionPath;
 
+  /// [FeedbackService] is the main service to submit the user feedbacks to the
+  /// Cloud Firestore.
   FeedbackService(
     this._firestore, {
     this.feedbackCollectionPath = 'feedbacks',
   });
 
+  /// [uploadUserFeedbackToFirebase] is the function which takes the user feedback
+  /// and all the system information and uploads it to the Cloud Firestore.
+  /// This function is [Platform] dependent. Which means it automatically
+  /// submits the appropriate system information based on the [Platform] on
+  /// which app is running. Currently supports only [Android] & [iOS]
   Future<bool> uploadUserFeedbackToFirebase({
     required FeedbackModel feedback,
     required AndroidDeviceInfo? androidDeviceInfo,
@@ -85,6 +97,7 @@ class FeedbackService {
           'userFeedbackData': feedback.userFeedbackData,
           'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
           'feedbackSubmittedOn': FieldValue.serverTimestamp(),
+          'reportType': feedback.reportType,
           'systemInformation': {
             'name': iosDeviceInfo!.name,
             'systemVersion': iosDeviceInfo.systemVersion,

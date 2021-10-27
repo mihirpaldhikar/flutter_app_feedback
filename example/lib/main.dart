@@ -48,20 +48,28 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 // Capture the Screen Shot and save to a variable of your choice.
                 final imagePath = await FeedbackScreenshot().captureScreen(
-                  screen:
-                      _homeScreen(), // Set the widget tree of whom you want to take screen shot before navigation to the FeedbackScreen
+                  // Set the widget tree of whom you want to take screen shot before
+                  // navigation to the FeedbackScreen
+                  screen: _homeScreen(),
                 );
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => FeedbackScreen(
-                      reportType:
-                          'User initiated report', // Type of the report whether report is initiated by the system or the user.
-                      //fromEmail: 'user@example.com', // Remove this comment if you need to set a default email in From field.
-                      screenShotPath: imagePath,
+                      // Type of the report whether report is initiated by the
+                      // system or the user.
+                      reportType: 'User initiated report',
+
+                      // if you need to set a default email in From Email field.
+                      fromEmail: 'user@example.com',
+
                       // Use the image that we have received from about function.
+                      screenShotPath: imagePath,
+
+                      // This text is shown at the bottom of the Feedback Screen
+                      // which describes how you will use the information.
                       feedbackFooterText:
-                          'Some System Logs will be sent to Developer.', // This text is shown at the bottom of the Feedback Screen which describes how you will use the information.
+                          'Some System Logs will be sent to Developer.',
                     ),
                   ),
                 );

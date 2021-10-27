@@ -37,11 +37,23 @@ import 'package:flutter_app_feedback/utils/random_string_generator.util.dart';
 import 'package:flutter_app_feedback/utils/validator.utils.dart';
 
 class FeedbackScreen extends StatefulWidget {
+  /// [screenShotPath] set the path where the screenshot image is saved.
+  /// Generally, automatically saved by [FeedbackScreen] class if it is used.
   final String screenShotPath;
+
+  /// [feedbackFooterText] is a text shown at the bottom of the [FeedbackScreen]
+  /// which explains user how you will use the feedback.
   final String feedbackFooterText;
+
+  /// [fromEmail] is a optional parameter which is used to set default email address
+  /// before navigating to the [FeedbackScreen]. Usually the email can be obtained by [FirebaseAuth]
   final String? fromEmail;
+
+  /// [reportType] is a parameter which describes how the report was generated.
+  /// It is either 'System initiated report' or 'User initiated report'.
   final String reportType;
 
+  /// [FeedbackScreen] as [StatefulWidget] for creating thr feedback screen UI.
   const FeedbackScreen({
     Key? key,
     required this.screenShotPath,

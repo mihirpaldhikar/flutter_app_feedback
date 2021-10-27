@@ -28,14 +28,23 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 
 class FeedbackScreenshot {
+  /// [FeedbackScreenshot] is used to capture the current state of the screen.
+  FeedbackScreenshot();
+
+  // Initialize the Screenshot Controller.
   final ScreenshotController _screenshotController = ScreenshotController();
 
-  Future<String> captureScreen({required Widget screen}) async {
+  /// [captureScreen] captures the current screen and saves in the applicationDirectory
+  /// under the 'feedbacks/screenshots' folder. Returns a path where the screenshot is saved.
+  /// Return type is [String]
+  Future<String> captureScreen({
+    required Widget screen,
+  }) async {
     try {
       final screenShot = await _screenshotController.captureFromWidget(screen);
       final directory = await getApplicationDocumentsDirectory();
       final image = File(
-          '${directory.path}/${DateTime.now().microsecond}${DateTime.now().hashCode}.png');
+          '${directory.path}/feedbacks/screenshots${DateTime.now().microsecond}${DateTime.now().hashCode}.png');
       image.writeAsBytes(screenShot);
       return image.path;
     } catch (error) {
