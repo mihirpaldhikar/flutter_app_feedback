@@ -34,8 +34,8 @@ class FeedbackScreenshot {
   // Initialize the Screenshot Controller.
   final ScreenshotController _screenshotController = ScreenshotController();
 
-  /// [captureScreen] captures the current screen and saves in the applicationDirectory
-  /// under the 'feedbacks/screenshots' folder. Returns a path where the screenshot is saved.
+  /// [captureScreen] captures the current screen and saves in the applicationDirectory.
+  /// Returns a path where the screenshot is saved.
   /// Return type is [String]
   Future<String> captureScreen({
     required Widget screen,
@@ -44,7 +44,7 @@ class FeedbackScreenshot {
       final screenShot = await _screenshotController.captureFromWidget(screen);
       final directory = await getApplicationDocumentsDirectory();
       final image = File(
-          '${directory.path}/feedbacks/screenshots${DateTime.now().microsecond}${DateTime.now().hashCode}.png');
+          '${directory.path}/${DateTime.now().microsecond}${DateTime.now().hashCode}.png');
       image.writeAsBytes(screenShot);
       return image.path;
     } catch (error) {

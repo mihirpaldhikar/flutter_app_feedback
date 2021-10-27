@@ -25,6 +25,12 @@ import 'package:flutter_app_feedback/models/app.model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AppService {
+
+  /// [AppService] is used to retrieve the App Build Information.
+  AppService();
+
+  /// [getAppInfo] is used to retrieve the information like [appVersion],
+  /// [packageName], [buildNumber] and much more from the current build of the app.
   Future<AppModel> getAppInfo() async {
     final PackageInfo _packageInfo = await PackageInfo.fromPlatform();
 

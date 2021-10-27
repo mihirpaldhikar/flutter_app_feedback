@@ -1,3 +1,8 @@
+## Version 0.0.2
+
+Added ```onFeedbackSubmissionStarted``` and ```onFeedbackSubmitted``` methods to handle when the
+submission of feedback is started or submission is completed.
+
 ## Version 0.0.1+2
 
 Added field of ```reportType``` to distinguish between system generated report and user generated
