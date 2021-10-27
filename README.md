@@ -1,5 +1,13 @@
 ![Flutter Feedback Banner](https://raw.githubusercontent.com/imihirpaldhikar/flutter_app_feedback/main/assets/flutter_app_feedback_banner.png)
 
+
+![Pub Version](https://img.shields.io/pub/v/flutter_app_feedback?color=g&label=Package%20Version&logo=flutter&logoColor=blue&style=flat)
+![Dart Analyze Workflow](https://github.com/imihirpaldhikar/flutter_app_feedback/actions/workflows/dart-analyze.yml/badge.svg) 
+![Dart Analyze Workflow](https://github.com/imihirpaldhikar/flutter_app_feedback/actions/workflows/pub-publish.yml/badge.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/imihirpaldhikar/flutter_app_feedback)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/imihirpaldhikar/flutter_app_feedback)
+
+
 # Flutter App Feedback
 
 Taking feedback from the user made easy!
@@ -14,27 +22,79 @@ This package also takes the screenshot of the current state of the app before ta
 
 In order to use this package, you need to integrate the Firebase with your Flutter Project. The docs regarding this can be found over [Flutter Firebase](https://firebase.flutter.dev).
 
-<center>
-<img src="./assets/feedback_screen.png" width="200">
-</center>
 
-## Example
+## Feedback Screen
 
-```dart
-ElevatedButton( // You can use any Widget.
+<img src="https://raw.githubusercontent.com/imihirpaldhikar/flutter_app_feedback/main/assets/feedback_screen.png" width="200">
+
+
+## Usage
+
+### Import 
+``` dart
+import 'package:flutter_app_feedback/flutter_app_feedback.dart';
+
+```
+
+### To Capture Screenshot
+``` dart
+// Capture the Screen Shot and save to a variable of your choice.
+  await FeedbackScreenshot().captureScreen(
+  // Set the widget tree of whom you want to take screen shot before navigation to the FeedbackScreen
+    screen: _homeScreen(),
+  );
+
+```
+
+### Use ```FeedbackScreen```
+
+``` dart
+
+FeedbackScreen(
+      // Type of the report whether report is initiated by the system or the user.
+      reportType: 'User initiated report',
+
+      // if you need to set a default email in From Email field.
+      fromEmail: 'user@example.com',
+
+      // Use the image that we have received from about function.
+      screenShotPath: imagePath,
+
+      // This text is shown at the bottom of the Feedback Screen which describes how you will use the information.
+      feedbackFooterText: 'Some System Logs will be sent to Developer.',
+    );
+
+```
+
+
+### Example
+
+``` dart
+ElevatedButton(
     onPressed: () async {
-       // Capture the Screen Shot and save to a variable of your choice.
-        final imagePath = await FeedbackScreenshot().captureScreen(
-          screen:_homeScreen(), // Set the widget tree of whom you want to take screen shot before navigation to the FeedbackScreen
-        ),
+                // Capture the Screen Shot and save to a variable of your choice.
+            final imagePath = await FeedbackScreenshot().captureScreen(
+                  // Set the widget tree of whom you want to take screen shot before
+                  // navigation to the FeedbackScreen
+                  screen: _homeScreen(),
+                );
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                builder: (BuildContext context) => FeedbackScreen(
+                // Type of the report whether report is initiated by the system or the user.
+                      reportType: 'User initiated report',
 
-        Navigator.push(context,MaterialPageRoute(
-                    builder: (BuildContext context) => FeedbackScreen(
-                      //fromEmail: 'user@example.com', // Remove this comment if you need to set a default email in From field.
-                      screenShotPath: imagePath,
+                      // if you need to set a default email in From Email field.
+                      fromEmail: 'user@example.com',
+
                       // Use the image that we have received from about function.
+                      screenShotPath: imagePath,
+
+                      // This text is shown at the bottom of the Feedback Screen
+                      // which describes how you will use the information.
                       feedbackFooterText:
-                          'Some System Logs will be sent to Developer.', // This text is shown at the bottom of the Feedback Screen which describes how you will use the information.
+                          'Some System Logs will be sent to Developer.',
                     ),
                   ),
                 );
@@ -54,3 +114,13 @@ Full Example can be found in [main.dart](./example/lib/main.dart)
 - [✔️] Upload the System information as well as app information 
 - [❌] Upload the logcat i.e logs of the app  
 - [❌] Edit Screenshot  
+
+## License
+![GitHub](https://img.shields.io/github/license/imihirpaldhikar/flutter_app_feedback?color=g)
+
+## Author
+
+[Mihir Paldhikar](https://github.com/imihirpaldhikar)
+
+## Credits
+ Thanks to all the contributers of this package and the packages that this project uses to make things work!
