@@ -53,6 +53,15 @@ class FeedbackScreen extends StatefulWidget {
   /// It is either 'System initiated report' or 'User initiated report'.
   final String reportType;
 
+  /// [isEmailEditable] is a parameter used to allow user to edit his email after
+  /// entering to the [FeedbackScreen]
+  final bool isEmailEditable;
+
+  /// [userId] is a parameter to set the user id of the current user who is providing
+  /// the feedback. This is useful for identifying the user. This value is usually
+  /// retrieved from the currently authenticated user.
+  final String userId;
+
   /// [onFeedbackSubmissionStarted] is used to do some activity when the Send Feedback button is
   /// clicked. You can show some message, dialogs or any other thing.
   final VoidCallback onFeedbackSubmissionStarted;
@@ -71,6 +80,8 @@ class FeedbackScreen extends StatefulWidget {
     this.fromEmail = '',
     required this.onFeedbackSubmissionStarted,
     required this.onFeedbackSubmitted,
+    required this.isEmailEditable,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -135,6 +146,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         currentStateScreenShotUrl: downloadableUrl,
                         userFeedbackData: _feedback.text,
                         packageName: appInfo.packageName,
+                        userEmail: _emailController.text,
+                        userId: widget.userId,
                       ),
                       androidDeviceInfo: await IdentifierService()
                           .getAndroidDeviceInformation(),
@@ -164,6 +177,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         currentStateScreenShotUrl: downloadableUrl,
                         userFeedbackData: _feedback.text,
                         packageName: appInfo.packageName,
+                        userEmail: _emailController.text,
+                        userId: widget.userId,
                       ),
                       androidDeviceInfo: null,
                       iosDeviceInfo:
@@ -202,10 +217,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     ),
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           'From: ',
                           style: TextStyle(
                             fontSize: 15,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
                           ),
                         ),
                         const SizedBox(
@@ -213,13 +232,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            readOnly: widget.isEmailEditable,
                             style: TextStyle(
                               color: Theme.of(context)
                                   .inputDecorationTheme
                                   .fillColor,
                             ),
-                            decoration: const InputDecoration(
-                              fillColor: Colors.white,
+                            decoration: InputDecoration(
+                              fillColor: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Colors.white
+                                  : Colors.black,
                               border: InputBorder.none,
                               hintText: 'Email',
                             ),
@@ -312,11 +335,15 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Screenshot',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.black
+                                        : Colors.white,
                                   ),
                                 ),
                                 const SizedBox(
@@ -374,11 +401,15 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'System Logs',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.black
+                                        : Colors.white,
                                   ),
                                 ),
                                 const SizedBox(

@@ -1,3 +1,8 @@
+## Version 0.0.3
+
+Added ```isEmailEditable``` & ```userId``` fields, Fixed the issue where email was not uploading to the Firebase Firestore
+Added support for Dark Mode,Bugs fixes and stability improvements.
+
 ## Version 0.0.2
 
 Added ```onFeedbackSubmissionStarted``` and ```onFeedbackSubmitted``` methods to handle when the

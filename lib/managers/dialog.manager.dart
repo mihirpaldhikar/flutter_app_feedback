@@ -40,7 +40,15 @@ class DialogManager {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('System Information'),
+        title: Text(
+          'System Information',
+          style: TextStyle(
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.black
+                : Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         content: SizedBox(
           height: MediaQuery.of(this.context).size.height,
           child: SingleChildScrollView(
@@ -50,73 +58,303 @@ class DialogManager {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: const Text('Report Type'),
-                  subtitle: Text(reportType),
-                ),
-                ListTile(
-                  title: const Text('Package name'),
-                  subtitle: Text(_appInfo.packageName),
-                ),
-                ListTile(
-                  title: const Text('Package Version'),
-                  subtitle: Text(_appInfo.appBuildNumber),
-                ),
-                ListTile(
-                  title: const Text('Package Version Name'),
-                  subtitle: Text(_appInfo.appVersion),
-                ),
-                ListTile(
-                  title: const Text('Process Name'),
-                  subtitle: Text(_appInfo.packageName),
-                ),
-                ListTile(
-                  title: const Text('Time'),
+                  title: Text(
+                    'Report Type',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                   subtitle: Text(
-                      '${DateTime.now().day}, ${DateTime.now().month}, ${DateTime.now().year}'),
+                    reportType,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Package name',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    _appInfo.packageName,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Package Version',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    _appInfo.appBuildNumber,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Package Version Name',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    _appInfo.appVersion,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Process Name',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    _appInfo.packageName,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Time',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 const Divider(
                   thickness: 2,
                 ),
-                const Text('System'),
-                ListTile(
-                  title: const Text('Device'),
-                  subtitle: Text('${_deviceInfo!.device}'),
+                Text(
+                  'System',
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Build Fingerprint'),
-                  subtitle: Text('${_deviceInfo.fingerprint}'),
+                  title: Text(
+                    'Device',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo!.device}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Model'),
-                  subtitle: Text('${_deviceInfo.model}'),
+                  title: Text(
+                    'Build Fingerprint',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.fingerprint}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Product'),
-                  subtitle: Text('${_deviceInfo.product}'),
+                  title: Text(
+                    'Model',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.model}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('SDK Version'),
-                  subtitle: Text('${_deviceInfo.version.sdkInt}'),
+                  title: Text(
+                    'Product',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.product}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Release'),
-                  subtitle: Text('${_deviceInfo.version.release}'),
+                  title: Text(
+                    'SDK Version',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.version.sdkInt}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Incremental Version'),
-                  subtitle: Text('${_deviceInfo.version.incremental}'),
+                  title: Text(
+                    'Release',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.version.release}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Codename'),
-                  subtitle: Text('${_deviceInfo.version.codename}'),
+                  title: Text(
+                    'Incremental Version',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.version.incremental}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Board'),
-                  subtitle: Text('${_deviceInfo.board}'),
+                  title: Text(
+                    'Codename',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.version.codename}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
                 ListTile(
-                  title: const Text('Brand'),
-                  subtitle: Text('${_deviceInfo.brand}'),
+                  title: Text(
+                    'Board',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.board}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Brand',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${_deviceInfo.brand}',
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),

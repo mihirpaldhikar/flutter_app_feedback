@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_feedback/flutter_app_feedback.dart';
 
@@ -47,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               onPressed: () async {
                 // Capture the Screen Shot and save to a variable of your choice.
-                final imagePath = await FeedbackScreenshot().captureScreen(
+                final imagePath =
+                    await FeedbackScreenshot(context).captureScreen(
                   // Set the widget tree of whom you want to take screen shot before
                   // navigation to the FeedbackScreen
                   screen: _homeScreen(),
@@ -59,6 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       // Type of the report whether report is initiated by the
                       // system or the user.
                       reportType: 'User initiated report',
+
+                      // Is the email editable by te user
+                      isEmailEditable: false,
+
+                      // User Id of the currently authenticated user
+                      userId: '1Fcb78snP12A619mb',
 
                       // if you need to set a default email in From Email field.
                       fromEmail: 'user@example.com',
