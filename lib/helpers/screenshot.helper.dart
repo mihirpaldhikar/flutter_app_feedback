@@ -24,12 +24,16 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 
 class FeedbackScreenshot {
+  /// [context] required to handle the function execution
+  final BuildContext context;
+
   /// [FeedbackScreenshot] is used to capture the current state of the screen.
-  FeedbackScreenshot();
+  FeedbackScreenshot(this.context);
 
   // Initialize the Screenshot Controller.
   final ScreenshotController _screenshotController = ScreenshotController();
@@ -41,7 +45,16 @@ class FeedbackScreenshot {
     required Widget screen,
   }) async {
     try {
-      final screenShot = await _screenshotController.captureFromWidget(screen);
+      final screenShot = await _screenshotController.captureFromWidget(
+        MediaQuery(
+          data: const MediaQueryData(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: Theme.of(context),
+            home: screen,
+          ),
+        ),
+      );
       final directory = await getApplicationDocumentsDirectory();
       final image = File(
           '${directory.path}/${DateTime.now().microsecond}${DateTime.now().hashCode}.png');

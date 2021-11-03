@@ -64,6 +64,10 @@ class FeedbackService {
           'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
           'feedbackSubmittedOn': FieldValue.serverTimestamp(),
           'reportType': feedback.reportType,
+          'userInformation': {
+            'userId': feedback.userId,
+            'email': feedback.userEmail,
+          },
           'systemInformation': {
             'device': androidDeviceInfo!.device,
             'isPhysicalDevice': androidDeviceInfo.isPhysicalDevice,
@@ -98,6 +102,10 @@ class FeedbackService {
           'currentStateScreenShotUrl': feedback.currentStateScreenShotUrl,
           'feedbackSubmittedOn': FieldValue.serverTimestamp(),
           'reportType': feedback.reportType,
+          'userInformation': {
+            'userId': feedback.userId,
+            'email': feedback.userEmail,
+          },
           'systemInformation': {
             'name': iosDeviceInfo!.name,
             'systemVersion': iosDeviceInfo.systemVersion,
