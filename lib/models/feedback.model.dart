@@ -31,6 +31,8 @@ class FeedbackModel {
   final String currentStateScreenShotUrl;
   final String userFeedbackData;
   final String reportType;
+  final String userEmail;
+  final String userId;
 
   FeedbackModel({
     required this.appName,
@@ -40,5 +42,7 @@ class FeedbackModel {
     required this.appVersion,
     required this.packageName,
     required this.reportType,
+    required this.userEmail,
+    required this.userId,
   });
 }
