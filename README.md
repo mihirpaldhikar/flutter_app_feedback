@@ -43,7 +43,7 @@ import 'package:flutter_app_feedback/flutter_app_feedback.dart';
 
 ``` dart
 // Capture the Screen Shot and save to a variable of your choice.
-  await FeedbackScreenshot().captureScreen(
+  await FeedbackScreenshot(context).captureScreen(
   // Set the widget tree of whom you want to take screen shot before navigation to the FeedbackScreen
     screen: _homeScreen(),
   );
