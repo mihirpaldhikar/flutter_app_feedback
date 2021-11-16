@@ -1,3 +1,7 @@
+## Version 0.0.4
+
+Updated the project dependencies, fixed documentation errors in ```README.md```
+
 ## Version 0.0.3
 
 Added ```isEmailEditable``` & ```userId``` fields, Fixed the issue where email was not uploading to the Firebase Firestore
